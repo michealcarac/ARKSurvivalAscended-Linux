@@ -60,7 +60,7 @@ apt install -y lib32gcc-s1 steamcmd steam-launcher
 
 # Grab Proton from Glorious Eggroll
 # https://github.com/GloriousEggroll/proton-ge-custom
-PROTON_URL="https://github.com/GloriousEggroll/proton-ge-custom/releases/download/GE-Proton8-21/GE-Proton8-21.tar.gz"
+PROTON_URL="https://github.com/GloriousEggroll/proton-ge-custom/releases/download/GE-Proton9-18/GE-Proton9-18.tar.gz"
 PROTON_TGZ="$(basename "$PROTON_URL")"
 PROTON_NAME="$(basename "$PROTON_TGZ" ".tar.gz")"
 if [ ! -e "/opt/game-resources/$PROTON_TGZ" ]; then
@@ -101,8 +101,8 @@ sudo -u steam tar -x -C "$STEAMDIR/compatibilitytools.d/" -f "/opt/game-resource
   sudo -u steam cp "$STEAMDIR/compatibilitytools.d/$PROTON_NAME/files/share/default_pfx" "$STEAMDIR/steamapps/compatdata/2430930" -r
 
 
-# Install the systemd service file for ARK Survival Ascended Dedicated Server (Island)
-cat > /etc/systemd/system/ark-island.service <<EOF
+# Install the systemd service file for ARK Survival Ascended Dedicated Server (SA)
+cat > /etc/systemd/system/ark-sa.service <<EOF
 [Unit]
 Description=ARK Survival Ascended Dedicated Server (Island)
 After=network.target
@@ -126,8 +126,8 @@ WantedBy=multi-user.target
 EOF
 
 systemctl daemon-reload
-systemctl enable ark-island
-systemctl start ark-island
+systemctl enable ark-sa
+systemctl start ark-sa
 
 
 # Create some helpful links for the user.
