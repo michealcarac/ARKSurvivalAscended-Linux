@@ -104,7 +104,7 @@ sudo -u steam tar -x -C "$STEAMDIR/compatibilitytools.d/" -f "/opt/game-resource
 # Install the systemd service file for ARK Survival Ascended Dedicated Server (SA)
 cat > /etc/systemd/system/ark-sa.service <<EOF
 [Unit]
-Description=ARK Survival Ascended Dedicated Server (Island)
+Description=ARK Survival Ascended Dedicated Server
 After=network.target
 
 [Service]
@@ -117,7 +117,7 @@ WorkingDirectory=$STEAMDIR/steamapps/common/ARK Survival Ascended Dedicated Serv
 Environment=XDG_RUNTIME_DIR=/run/user/$(id -u)
 Environment="STEAM_COMPAT_CLIENT_INSTALL_PATH=$STEAMDIR"
 Environment="STEAM_COMPAT_DATA_PATH=$STEAMDIR/steamapps/compatdata/2430930"
-ExecStart=$STEAMDIR/compatibilitytools.d/$PROTON_NAME/proton run ArkAscendedServer.exe TheIsland_WP?listen
+ExecStart=$STEAMDIR/compatibilitytools.d/$PROTON_NAME/proton run ArkAscendedServer.exe TheCenter_WP?listen
 Restart=on-failure
 RestartSec=20s
 
@@ -131,17 +131,17 @@ systemctl start ark-sa
 
 
 # Create some helpful links for the user.
-[ -e "/home/steam/island-GameUserSettings.ini" ] || \
-  sudo -u steam ln -s "$STEAMDIR/steamapps/common/ARK Survival Ascended Dedicated Server/ShooterGame/Saved/Config/WindowsServer/GameUserSettings.ini" /home/steam/island-GameUserSettings.ini
+[ -e "/home/steam/sa-GameUserSettings.ini" ] || \
+  sudo -u steam ln -s "$STEAMDIR/steamapps/common/ARK Survival Ascended Dedicated Server/ShooterGame/Saved/Config/WindowsServer/GameUserSettings.ini" /home/steam/sa-GameUserSettings.ini
 
-[ -e "/home/steam/island-ShooterGame.log" ] || \
-  sudo -u steam ln -s "$STEAMDIR/steamapps/common/ARK Survival Ascended Dedicated Server/ShooterGame/Saved/Logs/ShooterGame.log" /home/steam/island-ShooterGame.log
+[ -e "/home/steam/sa-ShooterGame.log" ] || \
+  sudo -u steam ln -s "$STEAMDIR/steamapps/common/ARK Survival Ascended Dedicated Server/ShooterGame/Saved/Logs/ShooterGame.log" /home/steam/sa-ShooterGame.log
 
 echo "================================================================================"
 echo "If everything went well, ARK Survival Ascended should be installed and starting!"
 echo ""
-echo "To restart the server: sudo systemctl restart ark-island"
-echo "To start the server:   sudo systemctl start ark-island"
-echo "To stop the server:    sudo systemctl stop ark-island"
+echo "To restart the server: sudo systemctl restart ark-sa"
+echo "To start the server:   sudo systemctl start ark-sa"
+echo "To stop the server:    sudo systemctl stop ark-sa"
 echo ""
-echo "Configuration is available in /home/steam/island-GameUserSettings.ini"
+echo "Configuration is available in /home/steam/sa-GameUserSettings.ini"
